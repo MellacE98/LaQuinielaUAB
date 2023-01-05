@@ -1,7 +1,6 @@
 import sqlite3
-
 import pandas as pd
-
+import numpy as np
 import settings
 
 
@@ -31,6 +30,19 @@ def load_historical_data(seasons):
         raise ValueError(f"No data for seasons {seasons}")
     return data
 
+
+def modify_data(data):
+    data[['goals_home', 'goals_away']] = data['score'].str.split(':', expand=True).astype(int)
+    
+    results = [
+        (data['goals_home'] > data['goals_away']),
+        (data['goals_home'] == data['goals_away']),
+        (data['goals_home'] < data['goals_away'])
+    ]
+    
+    data['result'] = np.select(results, [1,  0, 2])
+    return data
+    
 
 def save_predictions(predictions):
     with sqlite3.connect(settings.DATABASE_PATH) as conn:

@@ -71,7 +71,7 @@ predict_parser.add_argument(
 if __name__ == "__main__":
     args = parser.parse_args()
     logging.basicConfig(
-        filename=settings.LOGS_PATH / f"{args.task}_{datetime.now().strftime('%Y-%m-%d_%H:%M:%S')}.log",
+        filename=settings.LOGS_PATH / f"{args.task}_{datetime.now().strftime('%Y-%m-%d_%H%M%S')}.log",
         format="%(asctime)s - [%(levelname)s] - %(message)s",
         level=logging.INFO,
     )
@@ -79,6 +79,8 @@ if __name__ == "__main__":
         logging.info(f"Training LaQuiniela model with seasons {args.training_seasons}")
         model = models.QuinielaModel()
         training_data = io.load_historical_data(args.training_seasons)
+        training_data = io.modify_data(training_data)
+        #funcion que modifiqie los datos
         model.train(training_data)
         model.save(settings.MODELS_PATH / args.model_name)
         print(f"Model succesfully trained and saved in {settings.MODELS_PATH / args.model_name}")
