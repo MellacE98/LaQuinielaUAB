@@ -1,10 +1,10 @@
 import pickle
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
 
 class QuinielaModel:
 
     def __init__(self):
-        self.model = RandomForestClassifier()
+        self.model = LogisticRegression(max_iter=1000)
         self.teams = {}
     
 
@@ -34,19 +34,9 @@ class QuinielaModel:
         x['away_team'] = x['away_team'].map(self.teams)
         x.fillna(-1, inplace=True)
 
-        results = []
         prediction = self.model.predict(x)
-        
-        for i in list(predict_data['score']):
-            result = i.split(':')
-            if float(result[0]) > float(result[1]):
-                results.append(1)
-            elif float(result[0]) < float(result[1]):
-                results.append(2)
-            else:
-                results.append(0)
 
-        return ['X' for i in range(len(predict_data))]
+        return prediction
 
     @classmethod
     def load(cls, filename):
