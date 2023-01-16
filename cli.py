@@ -94,6 +94,8 @@ if __name__ == "__main__":
 
         wins_dict = model.wins_dict
         predict_data = io.add_wins(predict_data, wins_dict)
+        
+
         predict_data["pred"] = model.predict(predict_data)
         predict_data = io.drop_created_columns(predict_data)
 

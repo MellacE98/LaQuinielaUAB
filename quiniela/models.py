@@ -11,6 +11,9 @@ class QuinielaModel:
     def setWinsDict(self, wins_dict):
         self.wins_dict = wins_dict
 
+    def setGoalsDict(self, goals_dict):
+        self.goals_dict = goals_dict
+
 
     def train(self, train_data):
         # Do something here to train the model

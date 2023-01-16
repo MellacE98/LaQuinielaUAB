@@ -1,6 +1,9 @@
 ## LaQuiniela of LaLiga
 
-Team members: XXX - XXX -XXX
+Team members: 
+Adrià Aldomà Coll - 1651167
+Diego Carreño Asueta - 1663340
+Marc Benítez Benavides - 1528771
 
 This repo contains the skeleton for you to build your first ML project. Use the data in ```laliga.sqlite``` to build a ML model that predicts the outcome of a matchday in LaLiga (Spanish Football League).
 
